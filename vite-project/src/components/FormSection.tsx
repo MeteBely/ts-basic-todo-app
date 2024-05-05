@@ -1,22 +1,24 @@
 import { useState } from "react";
-import { Itodo } from "../types/todoInterface.ts";
+import { addTodoList } from "../slices/todoSlice.ts";
+import { useAppDispatch, useAppSelector } from "../store.ts";
 
-interface IFormProps {
-  todos: Itodo[];
-  setTodos: React.Dispatch<React.SetStateAction<Itodo[]>>;
-}
-
-const FormSection: React.FC<IFormProps> = ({ todos, setTodos }) => {
+const FormSection = () => {
+  const todos = useAppSelector((state) => state.todos.todos);
+  const dispatch = useAppDispatch();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (todos && todos.length > 0) {
+      const newTodo = { id: todos.length + 1, title, content };
+      dispatch(addTodoList(newTodo));
+    } else {
+      const newTodo = { id: 1, title, content };
+      dispatch(addTodoList(newTodo));
+    }
     setTitle("");
     setContent("");
-    if (todos !== null) {
-      setTodos((prev) => [...prev, { id: todos.length + 1, title, content }]);
-    }
   };
 
   return (
