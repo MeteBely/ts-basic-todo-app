@@ -12,7 +12,7 @@ const TodoList = () => {
 
   return (
     <section>
-      <div className="flex flex-row gap-8 justify-start items-center w-[98%] m-auto flex-wrap font-serif">
+      <div className="flex flex-row gap-8 justify-start items-center w-[98%] m-auto flex-wrap">
         {todos &&
           todos.length > 0 &&
           todos.map((todo) => (

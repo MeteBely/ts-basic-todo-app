@@ -11,7 +11,7 @@ const FormSection = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (todos && todos.length > 0) {
-      const newTodo = { id: todos.length + 1, title, content };
+      const newTodo = { id: todos[todos.length - 1].id + 1, title, content };
       dispatch(addTodoList(newTodo));
     } else {
       const newTodo = { id: 1, title, content };
@@ -22,7 +22,7 @@ const FormSection = () => {
   };
 
   return (
-    <section className="mb-8 font-serif mt-4">
+    <section className="mb-8 mt-4">
       <form
         className="w-[800px] m-auto flex flex-col gap-2 items-center justify-center"
         onSubmit={(e) => handleSubmit(e)}
